@@ -1,0 +1,6 @@
+body {
+	background: lime;
+	min-height: 100vh; /* ensures body fills the viewport height */
+	margin: 0;
+}
+
