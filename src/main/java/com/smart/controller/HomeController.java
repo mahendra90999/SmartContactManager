@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 	
-	@GetMapping("/home")
+	@GetMapping("/")
 	public String Home(Model model) {
 		
 		model.addAttribute("title","Smart Contact Manager");
@@ -21,4 +21,10 @@ public class HomeController {
 		return "about";
 	}
 	
+	@GetMapping("/signup")
+	public String signUp(Model model) {
+		
+		model.addAttribute("title","Register new User");
+		return "signup";
+	}
 }

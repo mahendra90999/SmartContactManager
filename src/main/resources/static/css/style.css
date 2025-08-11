@@ -1,6 +1,191 @@
-body {
-	background: lime;
-	min-height: 100vh; /* ensures body fills the viewport height */
-	margin: 0;
+:root {
+  --brand: 45 100% 51%;      /* Matches a refined "warning" accent */
+  --brand-contrast: 220 13% 18%;
+  --bg-start: 220 18% 8%;
+  --bg-end: 220 14% 12%;
+  --text: 220 15% 92%;
+  --muted: 220 10% 70%;
+  --ring: 45 100% 51%;
+  --card: 220 14% 16%;
+  --border: 220 10% 26%;
 }
 
+/* Base page styles */
+html, body {
+  scroll-behavior: smooth;
+}
+body {
+  color: hsl(var(--text));
+  background: radial-gradient(1200px 800px at 10% -20%, hsl(var(--bg-start)) 0%, hsl(var(--bg-end)) 60%);
+  background-attachment: fixed;
+  line-height: 1.6;
+}
+
+/* Navbar */
+.navbar.navbar-dark.bg-dark {
+  background-color: rgba(10, 10, 12, 0.82) !important;
+  -webkit-backdrop-filter: saturate(160%) blur(10px);
+  backdrop-filter: saturate(160%) blur(10px);
+  border-bottom: 1px solid hsl(var(--border) / 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  transition: background-color .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+.navbar .navbar-brand.text-warning {
+  color: hsl(var(--brand)) !important;
+  letter-spacing: .3px;
+  text-shadow: 0 0 18px hsl(var(--brand) / 0.35);
+}
+.navbar .nav-link {
+  position: relative;
+  color: hsl(var(--text) / 0.82) !important;
+  margin: 0 .25rem;
+  padding: .5rem .75rem;
+  transition: color .25s ease;
+}
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+  color: hsl(var(--text)) !important;
+}
+.navbar .nav-link.active {
+  color: hsl(var(--brand)) !important;
+  font-weight: 600;
+}
+.navbar .nav-link::after {
+  content: "";
+  position: absolute;
+  left: .75rem;
+  right: .75rem;
+  bottom: .35rem;
+  height: 2px;
+  background: linear-gradient(90deg, hsl(var(--brand) / 0), hsl(var(--brand)), hsl(var(--brand) / 0));
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform .25s ease;
+}
+.navbar .nav-link:hover::after,
+.navbar .nav-link.active::after {
+  transform: scaleX(1);
+}
+@media (max-width: 991.98px) {
+  .navbar .navbar-collapse {
+    background: rgba(12, 12, 14, 0.9);
+    border: 1px solid hsl(var(--border) / 0.4);
+    border-radius: .75rem;
+    padding: .5rem;
+    margin-top: .5rem;
+  }
+  .navbar .nav-link {
+    margin: .15rem .25rem;
+    border-radius: .5rem;
+  }
+  .navbar .nav-link:hover {
+    background: hsl(var(--card) / 0.6);
+  }
+}
+.navbar-toggler {
+  border-color: hsl(var(--text) / 0.35) !important;
+}
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 .2rem hsl(var(--ring) / 0.35) !important;
+}
+
+/* Fade-in animation for containers */
+.container.mt-5 {
+  animation: fade-in .5s ease both;
+}
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Cards */
+.card {
+  background: hsl(var(--card) / 0.9);
+  border: 1px solid hsl(var(--border) / 0.6);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* Banner */
+.banner {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: clamp(2rem, 5vw, 4rem) 1rem;
+  color: hsl(var(--text));
+  overflow: hidden;
+
+  /* Gradient + image */
+  background:
+    radial-gradient(1200px 600px at 10% -10%, hsl(var(--bg-start)) 0%, hsl(var(--bg-end)) 60%),
+    url('../Image/smart.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+}
+
+/* Dark overlay */
+.banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, hsl(var(--brand) / 0.18), transparent 30%),
+    linear-gradient(0deg, hsl(var(--brand) / 0.10), transparent 40%),
+    linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.45));
+  z-index: 0;
+}
+
+/* Banner content */
+.banner > * {
+  position: relative;
+  z-index: 1;
+}
+.banner h1 {
+  font-weight: 800;
+  font-size: 3rem;
+  letter-spacing: .2px;
+  line-height: 1.12;
+  text-shadow: 0 6px 24px rgba(0,0,0,.35);
+  margin-bottom: .75rem;
+}
+.banner .lead {
+  color: hsl(var(--muted));
+  font-size: clamp(1.05rem, 1.2rem + .4vw, 1.35rem);
+  margin-bottom: 1.25rem;
+}
+
+.banner .btn.btn-primary {
+  --bs-btn-bg: hsl(var(--brand));
+  --bs-btn-border-color: hsl(var(--brand));
+  --bs-btn-hover-bg: hsl(var(--brand) / 0.9);
+  --bs-btn-hover-border-color: hsl(var(--brand) / 0.9);
+
+  padding: 1rem 2.5rem; /* Bigger size */
+  font-size: 1.25rem;   /* Larger text */
+  font-weight: 700;     /* Bold text */
+  letter-spacing: 0.5px;
+  text-transform: uppercase; /* Modern look */
+  
+  border-radius: 50px;  /* Rounded pill button */
+  box-shadow: 0 10px 24px hsl(var(--brand) / 0.3);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Hover effect */
+.banner .btn.btn-primary:hover {
+  transform: translateY(-3px) scale(1.05); /* Lift & slightly enlarge */
+  box-shadow: 0 15px 30px hsl(var(--brand) / 0.4);
+}
+
+
+/* Responsive */
+@media (max-width: 576px) {
+  .banner { min-height: 60vh; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .banner, .banner * { animation: none !important; transition: none !important; }
+}
