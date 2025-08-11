@@ -3,11 +3,59 @@
 <head>
 <meta charset="UTF-8">
 <title th:text="${title}"></title>
+ <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <section>
-<h1>this is signup page.</h1>
-<h3>signup smart contactt manager</h3>
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 offset-md-2">
+					<h1 class="text-center text-warning">Register Here</h1>
+					
+					<form class="text-white" th:action="@{/do_register}" method="post" style="max-width: 600px; margin: auto; padding: 20px;">
+						
+    
+    <!-- Name -->
+    <div class="mb-3">
+        <label for="name" class="form-label">Full Name</label>
+        <input type="text" class="form-control" id="name" name="name" required>
+    </div>
+    
+    <!-- Email -->
+    <div class="mb-3">
+        <label for="email" class="form-label">Email Address</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+    </div>
+    
+    <!-- Password -->
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+    </div>
+    
+    <!-- About -->
+    <div class="mb-3">
+        <label for="about" class="form-label">About You</label>
+        <textarea class="form-control" id="about" name="about" rows="4" maxlength="500"></textarea>
+    </div>
+    
+    <!-- Submit Button -->
+    <div class="text-center">
+		<button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
+		&nbsp;&nbsp;&nbsp;
+		<button type="reset" class="btn btn-primary btn-lg">Reset</button> 
+   </div>
+    
+
+						<!-- Name field -->
+						
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	
 </section>
 </body>
 </html>
