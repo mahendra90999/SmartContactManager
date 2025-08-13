@@ -11,21 +11,26 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 offset-md-2">
+				<div th:if="${session.message}" th:classappend="${session.message.type}" class="alert alert-dismissible fade show" role="alert">
+				  <strong th:text="${session.message.content}"></strong>
+				  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+								
 					<h1 class="text-center text-warning">Register Here</h1>
 					
-					<form class="text-white" th:action="@{/do_register}" method="post" style="max-width: 600px; margin: auto; padding: 20px;">
+					<form class="text-white" th:action="@{/do_register}" method="post" th:object="${user}" style="max-width: 600px; margin: auto; padding: 20px;">
 						
     
     <!-- Name -->
     <div class="mb-3">
         <label for="name" class="form-label">Full Name</label>
-        <input type="text" class="form-control" id="name" name="name" required>
+        <input type="text" class="form-control" id="name" name="name" th:value="${user.name}" required>
     </div>
     
     <!-- Email -->
     <div class="mb-3">
         <label for="email" class="form-label">Email Address</label>
-        <input type="email" class="form-control" id="email" name="email" required>
+        <input type="email" class="form-control" id="email" name="email" th:value="${user.email}" required>
     </div>
     
     <!-- Password -->
@@ -37,7 +42,10 @@
     <!-- About -->
     <div class="mb-3">
         <label for="about" class="form-label">About You</label>
-        <textarea class="form-control" id="about" name="about" rows="4" maxlength="500"></textarea>
+        <textarea class="form-control" id="about" name="about" rows="4" maxlength="500" th:value="${user.about}"></textarea>
+    </div>
+    <div class="mb-3">
+    	<input type="checkbox" name="aggriment" id="aggriment" class="form-check-input"/> Accept terms and conditioins
     </div>
     
     <!-- Submit Button -->
