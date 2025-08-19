@@ -24,25 +24,29 @@
     <!-- Name -->
     <div class="mb-3">
         <label for="name" class="form-label">Full Name</label>
-        <input type="text" class="form-control" id="name" name="name" th:value="${user.name}" required>
+        <input type="text" class="form-control" th:classappend="${#fields.hasErrors('name') ? 'is-invalid':''}" id="name" name="name" th:value="${user.name}" >
+        <div class="invalid-feedback" th:each="e: ${#fields.errors('name')}" th:text="${e}"></div>
     </div>
     
     <!-- Email -->
     <div class="mb-3">
-        <label for="email" class="form-label">Email Address</label>
-        <input type="email" class="form-control" id="email" name="email" th:value="${user.email}" required>
+        <label for="email" class="form-label" >Email Address</label>
+        <input type="email" class="form-control" id="email" name="email" th:value="${user.email}" th:classappend="${#fields.hasErrors('name') ? 'is-invalid':''}">
+    	<div class="invalid-feedback" th:each="e: ${#fields.errors('email')}" th:text="${e}"></div>
     </div>
     
     <!-- Password -->
     <div class="mb-3">
         <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" name="password" required>
+        <input type="password" class="form-control" id="password" name="password" th:classappend="${#fields.hasErrors('name') ? 'is-invalid':''}">
+    	<div class="invalid-feedback" th:each="e: ${#fields.errors('password')}" th:text="${e}"></div>
     </div>
     
     <!-- About -->
     <div class="mb-3">
         <label for="about" class="form-label">About You</label>
-        <textarea class="form-control" id="about" name="about" rows="4" maxlength="500" th:value="${user.about}"></textarea>
+        <textarea class="form-control" id="about" name="about" rows="4" maxlength="500" th:value="${user.about}" th:classappend="${#fields.hasErrors('name') ? 'is-invalid':''}"></textarea>
+    	<div class="invalid-feedback" th:each="e: ${#fields.errors('about')}" th:text="${e}"></div>
     </div>
     <div class="mb-3">
     	<input type="checkbox" name="aggriment" id="aggriment" class="form-check-input"/> Accept terms and conditioins

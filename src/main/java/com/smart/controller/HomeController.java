@@ -3,6 +3,7 @@ package com.smart.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import com.smart.entities.User;
 import com.smart.helper.Messages;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 public class HomeController {
@@ -44,7 +46,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/do_register",method = RequestMethod.POST )
-	public String registerUser(@ModelAttribute("user") User user,@RequestParam(value="aggriment",defaultValue = "false") boolean agriment,Model model,HttpSession session) {
+	public String registerUser(@Valid @ModelAttribute("user") User user,BindingResult result1,@RequestParam(value="aggriment",defaultValue = "false") boolean agriment,Model model,HttpSession session) {
 		
 		try {
 			if(!agriment) {
@@ -52,6 +54,14 @@ public class HomeController {
 				System.out.println("You have not aggred the terms and conditions.");
 				throw new Exception("You have not aggred the terms and conditions.");
 			}
+			
+			if(result1.hasErrors())
+			{
+				System.out.println("ERROR "+ result1.toString());
+				model.addAttribute("user",user);
+				return "signup";
+			}
+			
 			
 			user.setRole("ROLE_USER");
 			user.setEnabled(true);

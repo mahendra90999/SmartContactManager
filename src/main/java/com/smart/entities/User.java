@@ -12,6 +12,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="user")
@@ -20,14 +24,28 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	@NotBlank(message = "Please enter the name...")
+	@Size(max = 20,message = "name should be in 20 charachter..")
 	private String name;
 	
 	@Column(unique = true)
+	@NotBlank(message = "email is required")
+	@Email(message = "Please enter a valid email address")
 	private String email;
+	
+	@NotBlank(message = "Password is required")
+	@Size(min = 6, max = 100, message = "Password must be at least 6 characters")
+	@Pattern(
+			  regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!]).{8,}$",
+			  message = "Password must be at least 8 characters long, include 1 uppercase, 1 lowercase, 1 digit, and 1 special character"
+			)
 	private String password;
 	private String role;
 	private boolean enabled;
 	private String imageUrl;
+	
+	@Size(max = 500, message = "About section cannot exceed 500 characters")
 	@Column(length = 500)
 	private String about;
 	
