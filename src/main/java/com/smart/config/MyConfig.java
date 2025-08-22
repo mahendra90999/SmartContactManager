@@ -21,6 +21,7 @@ public class MyConfig{
             .requestMatchers("/**").permitAll()
         .and()
         .formLogin()
+        .loginPage("/signin")
         .and()
         .csrf().disable();
 		

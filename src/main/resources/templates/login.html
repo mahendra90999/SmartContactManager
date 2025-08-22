@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${title}"></title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<section>
+  <section>
+    <div class="container d-flex align-items-center justify-content-center vh-100">
+      <div class="card shadow-lg p-7 rounded-4" 
+           style="background-color: rgb(27, 30, 35); max-width: 500px; width: 100%;
+                  transform: translateY(-40px);">
+        
+        <!-- Error/Logout alerts -->
+        <div th:if="${param.error}" class="alert alert-danger mb-3">
+          Invalid username or password.
+        </div>
+        <div th:if="${param.logout}" class="alert alert-success mb-3">
+          You have been logged out.
+        </div>
+
+        <h3 class="text-center mb-4 text-warning">Login</h3>
+
+        <!-- Login form -->
+        <form th:action="@{/signin}" method="post" class="text-white">
+          
+          <!-- Username / Email -->
+          <div class="mb-4">
+            <label for="username" class="form-label">Email</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Enter your email" required>
+          </div>
+
+          <!-- Password -->
+          <div class="mb-5">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+          </div>
+
+          <!-- Login Button -->
+          <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+
+        <!-- Extra links -->
+        <div class="text-center mt-3">
+          <a href="#" class="text-decoration-none text-warning">Forgot Password?</a><br>
+          <a href="/signup" class="text-decoration-none text-warning">Create an Account</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+</body>
+</html>
