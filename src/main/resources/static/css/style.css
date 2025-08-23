@@ -50,6 +50,12 @@ body {
   color: hsl(var(--brand)) !important;
   font-weight: 600;
 }
+
+.navbar .nav-link.active2 {
+  color: hsl(var(--brand)) !important;
+  font-weight: 600;
+}
+
 .navbar .nav-link::after {
   content: "";
   position: absolute;

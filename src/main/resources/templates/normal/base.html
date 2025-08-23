@@ -16,7 +16,7 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
   <div class="container">
-    <a class="navbar-brand fw-bold text-warning" href="#">MySite</a>
+    <a class="navbar-brand fw-bold text-warning" href="#">ContactManager</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
             data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" 
             aria-label="Toggle navigation">
@@ -25,10 +25,9 @@
     
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-        <li class="nav-item"><a class="nav-link" th:href="@{/signin}">Login</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">SignUP</a></li>
+        <li class="nav-item"><a class="nav-link active" th:href="@{/user/index}">dashboard</a></li>
+        <li class="nav-item"><a class="nav-link active2" href="#"><span  th:text="${user.name}"></span></a></li>
+        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
       </ul>
     </div>
   </div>

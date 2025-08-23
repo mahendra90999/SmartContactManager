@@ -13,17 +13,16 @@ public class MyConfig{
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		
-		http
-        .authorizeHttpRequests()
-            .requestMatchers("/admin/**").hasRole("ADMIN")
-            .requestMatchers("/user/**").hasRole("USER")
-            .requestMatchers("/**").permitAll()
-        .and()
-        .formLogin()
-        .loginPage("/signin")
-        .and()
-        .csrf().disable();
+
+        http
+                .authorizeHttpRequests(requests -> requests
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/user/**").hasRole("USER")
+                        .requestMatchers("/**").permitAll())
+                .formLogin(login -> login
+                        .loginPage("/signin")
+                        .loginProcessingUrl("/dologin").defaultSuccessUrl("/user/index"))
+                .csrf(csrf -> csrf.disable());
 		
 		return http.build();
 	}
