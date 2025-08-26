@@ -213,10 +213,70 @@ body {
 
 
 /* Responsive */
-@media (max-width: 576px) {
+@media only screen and (max-width: 600px) {
   .banner { min-height: 60vh; }
 }
 @media (prefers-reduced-motion: reduce) {
   .banner, .banner * { animation: none !important; transition: none !important; }
 }
 
+
+/*sidebar style*/
+@media only screen and (max-width:600px){
+	.sidebar{
+		display:none;
+		width:80% !important;
+		background: #0c0d11;
+		height:100vh;
+		position: fixed;
+		padding-top: 20px;
+	}
+	
+	.content{
+		margin-left: 5%!important;
+	}
+}
+
+
+.sidebar{
+	width: 18%;	
+	background : #0c0d11;
+	position: fixed;
+	height: 100%;
+	padding-top: 1%;
+}
+
+.sidebar a{
+	display: block;
+	width: 100%;
+	padding: 10px 25px;
+	text-decoration: none;
+	color: white;	
+}
+
+.sidebar a:hover{
+	color: yellow;
+	font-weight: bold;	
+}
+
+.sidebar .divider{
+	height: .5px;
+	width: 100%;
+	background: #e2e2e2;
+	margin-top: 10px;
+}
+
+.content{
+	margin-left: 20%;
+	color: white;
+	
+}
+
+.crossBtn{
+	position: absolute;
+	top: 0;
+	right: 35px;
+	font-size: 36px;
+	cursor: pointer;
+	color: white;
+}
