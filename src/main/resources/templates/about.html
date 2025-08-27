@@ -5,9 +5,91 @@
 <title th:text="${title}"></title>
 </head>
 <body>
-<section>
-<h1>this is about page.</h1>
-<h3>about smart contactt manager</h3>
-</section>
+<section style="color:white;">
+
+
+  <!-- Hero -->
+  <header class="hero">
+    <!-- <img
+      src="#"
+      alt="Profile Image"
+      class="profile-img mb-3"
+    > -->
+    <h1>Smart Contact Manager</h1>
+    <p>Your simple, efficient contact management system built with Java &amp; Spring Boot.</p>
+    <a
+      href="https://github.com/mahendra90999/SmartContactManager"
+      class="btn btn-github btn-lg mt-3"
+      target="_blank"
+    >
+      <i class="fab fa-github"></i>View on GitHub
+    </a>
+  </header>
+
+  <div class="container my-5">
+
+    <!-- About Section -->
+    <section id="about">
+      <h2 class="section-title">About the Project</h2>
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <p>
+            SmartContactManager is a full-stack contact management web app that
+            lets you store, edit, and organize your contacts with ease. Built
+            on Spring Boot, Hibernate, and Thymeleaf, it provides:
+          </p>
+          <ul>
+            <li>Secure CRUD operations with form validation</li>
+            <li>Search &amp; filter contacts by name or email</li>
+            <li>Profile picture upload and preview</li>
+            <li>Responsive UI powered by Bootstrap 5</li>
+          </ul>
+        </div>
+        <div class="col-lg-6">
+          <img
+            src="https://via.placeholder.com/600x400.png?text=App+Screenshot"
+            alt="App Screenshot"
+            class="img-fluid rounded shadow-sm"
+          >
+        </div>
+      </div>
+    </section>
+
+    <hr class="my-5">
+
+    <!-- Tech Stack -->
+    <section id="tech">
+      <h2 class="section-title">Tech Stack</h2>
+      <div class="d-flex flex-wrap">
+        <span class="badge bg-primary tech-badge">Java 17</span>
+        <span class="badge bg-success tech-badge">Spring Boot</span>
+        <span class="badge bg-info tech-badge">Hibernate</span>
+        <span class="badge bg-warning text-dark tech-badge">Thymeleaf</span>
+        <span class="badge bg-secondary tech-badge">MySQL</span>
+        <span class="badge bg-dark tech-badge">Bootstrap 5</span>
+      </div>
+    </section>
+
+    <hr class="my-5">
+
+    <!-- Author Info -->
+    <section id="author" class="text-center">
+      <h2 class="section-title">About Me</h2>
+      <p>
+        I’m Mahendra, a passionate Java developer from Thane, MH, India. I
+        love building intuitive web applications and exploring the latest
+        in backend frameworks. This repository reflects my dedication to
+        clean code, testability, and user-centric design.
+      </p>
+      <a
+        href="https://github.com/mahendra90999"
+        class="btn btn-outline-dark mt-3"
+        target="_blank"
+      >
+        <i class="fab fa-github me-1"></i>My GitHub Profile
+      </a>
+    </section>
+  </div>
+ </section>
 </body>
 </html>

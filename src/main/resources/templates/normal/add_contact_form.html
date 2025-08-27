@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{normal/base::layout(~{::section})}">
+<head>
+	<meta charset="UTF-8" />
+	<title tx:text="${title}"></title>
+</head>
+<body>
+	<section style="color:white;">
+		<h1 style="text:white">Add Contact</h1>
+		
+		<div class="container mt-5 col-md-7">
+		<div th:if="${messages != null}"
+     th:class="'alert alert-' + ${messages.type}"
+     role="alert">
+    <span th:text="${messages.content}"></span>
+</div>
+    <h2 class="mb-4 d-flex justify-content-center">User Information Form</h2>
+    <form action="#" th:object="${contact}" enctype="multipart/form-data" method="post" th:action="@{/user/process_contact}">
+      <!-- Name -->
+      <div class="mb-3">
+      	<i class="fas fa-user"></i>
+        <label for="name" class="form-label"> First Name</label>
+        <input type="text" class="form-control" id="name" name="name" >
+      </div>
+
+      <!-- Second Name -->
+      <div class="mb-3">
+      	<i class="fas fa-id-card"></i>
+        <label for="secondName" class="form-label"> Second Name</label>
+        <input type="text" class="form-control" id="secondName" name="secondName">
+      </div>
+
+      <!-- Work -->
+      <div class="mb-3">
+      <i class="fas fa-briefcase"></i>
+        <label for="work" class="form-label"> Occupation</label>
+        <input type="text" class="form-control" id="work" name="work">
+      </div>
+
+      <!-- Email -->
+      <div class="mb-3">
+      	<i class="fas fa-envelope"></i>
+        <label for="email" class="form-label"> Email address</label>
+        <input type="email" class="form-control" id="email" name="email" >
+      </div>
+
+      <!-- Phone -->
+      <div class="mb-3">
+      	<i class="fas fa-phone"></i>
+        <label for="phone" class="form-label"> Phone Number</label>
+        <input type="tel" class="form-control" id="phone" name="phone">
+      </div>
+
+      <!-- Image -->
+      <div class="mb-3">
+      <i class="fas fa-image"></i>
+        <label for="image" class="form-label"> Profile Image</label>
+        <input type="file" class="form-control" id="profileImage" name="profileImage" >
+      </div>
+
+      <!-- Description -->
+      <div class="mb-3">
+      <i class="fas fa-align-left"></i>
+        <label for="description" class="form-label"> Description</label>
+        <textarea class="form-control" id="description" name="description" rows="6" maxlength="5000"></textarea>
+      </div>
+
+      <!-- Submit Button -->
+	<div class="d-flex justify-content-center mb-5">
+	  <button type="submit" class="btn btn-primary">Submit</button>
+	</div>
+    </form>
+  </div>
+  
+  <div class="mt-5">&nbsp;</div>
+	
+	</section>
+</body>
+</html>

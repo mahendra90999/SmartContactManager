@@ -15,6 +15,7 @@ public class Contact {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cid;
+	
 	private String name;
 	private String secondName;
 	private String work;
@@ -37,8 +38,10 @@ public class Contact {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 	public Contact(int cid, String name, String secondName, String work, String email, String phone, String image,
-			String description) {
+			String description, User user) {
 		super();
 		this.cid = cid;
 		this.name = name;
@@ -48,7 +51,9 @@ public class Contact {
 		this.phone = phone;
 		this.image = image;
 		this.description = description;
+		this.user = user;
 	}
+	
 	public int getCid() {
 		return cid;
 	}

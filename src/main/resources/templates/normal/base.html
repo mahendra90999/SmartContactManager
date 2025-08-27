@@ -26,8 +26,9 @@
     
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link active" th:href="@{/user/index}">dashboard</a></li>
         <li class="nav-item"><a class="nav-link active2" href="#"><span  th:text="${user.name}"></span></a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/user/index}">dashboard</a></li>
+		<li class="nav-item"><a class="nav-link" th:href="@{/about}">about</a></li>
         <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
       </ul>
     </div>
@@ -39,12 +40,12 @@
 	<!--  <span class="crossBtn" onclick="togglesidebar()">&times;</span>-->
 	
 	
-	<a href="#" class="item"><i class="fa-solid fa-house"></i> Home</a><div class="divider"></div>
+	<a href="#" th:href="@{/user/index}" class="item"><i class="fa-solid fa-house"></i> Home</a><div class="divider"></div>
 	<a href="#" class="item"><i class="fa-solid fa-phone"></i> View contacts</a><div class="divider"></div>
-	<a href="#" class="item"><i class="fa-solid fa-plus"></i> Add contacts</a><div class="divider"></div>
+	<a href="#" th:href="@{/user/add_contacts}" class="item"><i class="fa-solid fa-plus"></i> Add contacts</a><div class="divider"></div>
 	<a href="#" class="item"><i class="fa-solid fa-user"></i> Your Profile</a><div class="divider"></div>
 	<a href="#" class="item"><i class="fa-solid fa-gear"></i> setting</a><div class="divider"></div>
-	<a href="#" class="item"><i class="fa-solid fa-right-from-bracket"></i> logout</a>
+	<a href="#" th:href="@{/logout}" class="item"><i class="fa-solid fa-right-from-bracket"></i> logout</a>
 	<div class="divider"></div>
 </div>	
 	
