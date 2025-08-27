@@ -115,11 +115,13 @@ public class UserController {
 			this.userRepository.save(user);
 			System.out.println("added to database.");
 			model.addAttribute("message2", new Messages("Contact saved successfully..", "success"));
-
+			
 		}
 		catch(Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
+			String m = "something went wrong \n"+e.getMessage();
+			model.addAttribute("message2", new Messages(m, "danger"));
 		}
 		
 		

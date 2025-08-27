@@ -29,7 +29,7 @@
       <div class="mb-3">
       	<i class="fas fa-user"></i>
         <label for="name" class="form-label"> First Name</label>
-        <input type="text" class="form-control" id="name" name="name" >
+        <input type="text" class="form-control" id="name" name="name" required>
       </div>
 
       <!-- Second Name -->
@@ -50,14 +50,14 @@
       <div class="mb-3">
       	<i class="fas fa-envelope"></i>
         <label for="email" class="form-label"> Email address</label>
-        <input type="email" class="form-control" id="email" name="email" >
+        <input type="email" class="form-control" id="email" name="email" required>
       </div>
 
       <!-- Phone -->
       <div class="mb-3">
       	<i class="fas fa-phone"></i>
         <label for="phone" class="form-label"> Phone Number</label>
-        <input type="tel" class="form-control" id="phone" name="phone">
+        <input type="tel" class="form-control" id="phone" name="phone" min=10>
       </div>
 
       <!-- Image -->
@@ -71,7 +71,7 @@
       <div class="mb-3">
       <i class="fas fa-align-left"></i>
         <label for="description" class="form-label"> Description</label>
-        <textarea class="form-control" id="description" name="description" rows="6" maxlength="5000"></textarea>
+        <textarea class="form-control" id="mytextarea" name="description" rows="6" maxlength="5000"></textarea>
       </div>
 
       <!-- Submit Button -->
@@ -98,6 +98,12 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 </script>
+    <script src="https://cdn.tiny.cloud/1/a4279d8qeq1se2n7jb1ubl0o0cgbdhfxjlvdly1izpojl268/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+<script>
+      tinymce.init({
+        selector: '#mytextarea'
+      });
+    </script>
 	
 </body>
 
