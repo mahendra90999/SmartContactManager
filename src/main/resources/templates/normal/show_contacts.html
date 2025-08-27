@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{normal/base::layout(~{::section})}">
+<head>
+	<meta charset="UTF-8" />
+	<title>user_dashboard</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+	<section style="color:white;">
+		<h1 style="text:white">Contacts</h1>
+		
+		<div class="container mt-5 rounded table-responsive rounded overflow-hidden ">
+   <table class="tablecon table align-middle tablecon ">
+        <thead class="tablecon2">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Second Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="c, stat : ${contacts}">
+                <th scope="row" th:text="${stat.index + 1}">1</th>
+                <td th:text="${c.name}">Mark</td>
+                <td th:text="${c.secondName}">Otto</td>
+                <td th:text="${c.email}">@mdo</td>
+                <td th:text="${c.phone}">@mdo</td>
+                <td>
+                    <button class="btn btn-danger btn-sm">Delete</button>
+                    <button class="btn btn-warning btn-sm btn-update">Update</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+		
+		
+	</section>
+</body>
+</html>

@@ -349,3 +349,16 @@ body {
   opacity: 0;
   transform: translateY(-50px);
 }
+
+
+/*show_contacts table css */
+.table.tablecon {
+  /* override the core table variables */
+  margin-top:-0px;
+  --bs-table-bg:       #1a1d23;
+  --bs-table-color:    #fff;
+  --bs-table-border-color: rgba(255,255,255,0.2);
+  --bs-table-hover-bg: rgba(255,255,255,0.1);
+  font-size: larger;
+  font-family: monospace;
+}
