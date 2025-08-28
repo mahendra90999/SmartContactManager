@@ -13,12 +13,12 @@
    <table class="tablecon table align-middle tablecon ">
         <thead class="tablecon2">
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Second Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Action</th>
+                <th style="color:#ffc105" scope="col">#</th>
+                <th style="color:#ffc105" scope="col">Name</th>
+                <th style="color:#ffc105" scope="col">Second Name</th>
+                <th style="color:#ffc105" scope="col">Email</th>
+                <th style="color:#ffc105" scope="col">Phone</th>
+                <th style="color:#ffc105" scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -35,6 +35,14 @@
             </tr>
         </tbody>
     </table>
+    <!-- pagination -->
+    <nav class="pagination-nav mb-5" aria-label="Page navigation example mb-5">
+	  <ul class="pagination mb-5">
+	    <li class="page-item" th:if="${currentPage != 0}"><a class="page-link" th:href="@{'/user/show_contacts/'+${currentPage-1}}" >Previous</a></li>
+	    <li class="page-item" th:classappend="${currentPage==i-1?'active':''}" th:each="i : ${#numbers.sequence(1,totalPages)}"><a class="page-link" th:href="@{'/user/show_contacts/'+${i-1}}" href="#"><span th:text="${i}"></span></a></li>
+	    <li class="page-item" th:if="${currentPage+1 != totalPages}"><a class="page-link" th:href="@{'/user/show_contacts/'+${currentPage+1}}" href="#">Next</a></li>
+	  </ul>
+	</nav>
 </div>
 		
 		

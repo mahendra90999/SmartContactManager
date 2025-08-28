@@ -9,10 +9,14 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -135,16 +139,25 @@ public class UserController {
 	}
 	
 	
-	@GetMapping("/show_contacts")
-	public String showContacts(Model model,Principal principal) {
+//	show contact page handler
+//	per pages 5 
+//	current page 0
+	
+	@GetMapping("/show_contacts/{page}")
+	public String showContacts(@PathVariable("page") Integer page,Model model,Principal principal) {
 		
 		String username = principal.getName();
 		User user = userRepository .getUserByname(username);
 		
-		List<Contact> contacts = contactRepository.findContactByUser(user.getId());
+//		current Page and contact per page 5
+		Pageable pageable = PageRequest.of(page, 8);
+		
+		Page<Contact> contacts = contactRepository.findContactByUser(user.getId(),pageable);
 		
 		model.addAttribute("contacts",contacts);
-		System.out.println(contacts);
+		model.addAttribute("currentPage",page);
+		model.addAttribute("totalPages",contacts.getTotalPages());
+		
 		return "normal/show_contacts";
 	}
 	
