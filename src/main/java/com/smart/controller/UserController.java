@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.smart.dao.UserRepository;
 import com.smart.dao.contactRepository;
@@ -30,7 +33,14 @@ import com.smart.helper.Messages;
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
+//implements WebMvcConfigurer interface for upload image 
+public class UserController implements WebMvcConfigurer{
+//	override addResourcehandlers method for import thr image out of static folder
+	@Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/uploads/**")
+                .addResourceLocations("file:D:/eclipse/smartcontactmanager/uploads/");
+    }
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -93,6 +103,7 @@ public class UserController {
 			if(file.isEmpty()) {
 				System.out.println("file is emplty");
 				model.addAttribute("messages", new Messages("your image is empty","danger"));
+				contact.setImage("images.jpg");
 			}else {
 				contact.setImage(file.getOriginalFilename());
 				
@@ -159,6 +170,20 @@ public class UserController {
 		model.addAttribute("totalPages",contacts.getTotalPages());
 		
 		return "normal/show_contacts";
+	}
+	
+//	showing specific contact details;
+	@GetMapping("/{cid}/contact")
+	public String showContactDetail(@PathVariable("cid") Integer cid,Model model) {
+		System.out.println(cid);
+		model.addAttribute("title","Details");
+		
+		Optional<Contact> contactOptional=this.contactRepository.findById(cid);
+		
+		Contact contact =contactOptional.get();
+		
+		model.addAttribute("contact",contact);
+		return "normal/contact_detail";
 	}
 	
 	
