@@ -9,7 +9,7 @@
 <body>
   <section class="py-5">
     <div class="container">
-      <div class="card card2 mx-auto" style="max-width: 700px;align-items: center">
+      <div class="card card2 mx-auto" style="max-width: 700px;align-items: center" th:if="${contact}">
         <img alt="image" th:src="@{'/uploads/images/' + ${contact.image}}" class="img_thumbnail2 mb-3" style="align-items: center!important;"/>
         <h3 th:text="${contact.name}" class="mt-2 mb-4" style="color: white"></h3>
 
@@ -44,6 +44,11 @@
           </tbody>
         </table>
       </div>
+    </div>
+    <div>
+    	<h1 th:unless="${contact}" style="color: red; text-align: center; font-weight: bold; margin-top: 20px;">
+		    You don't have any kind of ID.
+		</h1>
     </div>
   </section>
 </body>

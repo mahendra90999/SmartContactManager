@@ -174,7 +174,7 @@ public class UserController implements WebMvcConfigurer{
 	
 //	showing specific contact details;
 	@GetMapping("/{cid}/contact")
-	public String showContactDetail(@PathVariable("cid") Integer cid,Model model) {
+	public String showContactDetail(@PathVariable("cid") Integer cid,Model model,Principal principal) {
 		System.out.println(cid);
 		model.addAttribute("title","Details");
 		
@@ -182,7 +182,12 @@ public class UserController implements WebMvcConfigurer{
 		
 		Contact contact =contactOptional.get();
 		
-		model.addAttribute("contact",contact);
+		String username = principal.getName();
+		User user = this.userRepository.getUserByname(username);
+		
+		if(user.getId()==contact.getUser().getId()) {
+			model.addAttribute("contact",contact);
+		}
 		return "normal/contact_detail";
 	}
 	
