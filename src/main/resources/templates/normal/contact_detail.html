@@ -37,7 +37,10 @@
 			</tr>
 			<tr>
 			<td colspan="2" class="text-center">
-                    <button class="btn btn-warning btn-sm btn-update w-100 mb-3 fw-bold">Update</button>
+                    <!-- <button class="btn btn-warning btn-sm btn-update w-100 mb-3 fw-bold">Update</button> -->
+                    <form th:action="@{'/user/update_contact/'+${contact.cid}}" method="Post">
+						<button class="btn btn-warning btn-sm btn-update w-100 mb-3 fw-bold">Update</button>
+					</form> 
                     <button class="btn btn-danger btn-sm w-100 fw-bold">Delete</button>
             </td>
             </tr>

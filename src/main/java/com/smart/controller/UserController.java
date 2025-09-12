@@ -1,6 +1,7 @@
 package com.smart.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,16 +21,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.smart.dao.UserRepository;
 import com.smart.dao.contactRepository;
 import com.smart.entities.Contact;
 import com.smart.entities.User;
 import com.smart.helper.Messages;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/user")
@@ -192,6 +197,95 @@ public class UserController implements WebMvcConfigurer{
 	}
 	
 	
+	@GetMapping("/delete/{cid}")
+	public String deleteContact(@PathVariable("cid") Integer cid,Model model,Principal principal,RedirectAttributes redirectAttributes) {
+		Optional<Contact> contactOptional =this.contactRepository.findById(cid);
+		Contact contact = contactOptional.get();
+		
+		String username = principal.getName();
+		User user = this.userRepository.getUserByname(username);
+
+		
+		if(user.getId()==contact.getUser().getId()) {
+			contact.setUser(null);
+			this.contactRepository.delete(contact);			
+		}
+		redirectAttributes.addFlashAttribute("message", new Messages("contact deleted successfully...","success"));
+		return "redirect:/user/show_contacts/0";
+	}
+	
+	
+	@PostMapping("/update_contact/{cid}")
+	public String updateContact(@PathVariable("cid") Integer cid,Model model){
+		
+		model.addAttribute("title","update Contact");
+		Contact contact = this.contactRepository.findById(cid).get();
+		
+		model.addAttribute("contact",contact);
+		return "normal/updateContact";
+	}
+	
+//	update contact handler
+	@RequestMapping(value="/process_update",method = RequestMethod.POST)
+	public String updateHandler(@ModelAttribute Contact contact,@RequestParam("profileImage") MultipartFile file,Model model,HttpSession session,Principal principal) {
+		
+		try {
+			Contact oldContactDetail=this.contactRepository.findById(contact.getCid()).get();
+			System.out.println("oldContactDetaili"+oldContactDetail);
+			
+			if(!file.isEmpty()) {
+//				rewrite the file
+				String uploadDir = "uploads/images"; // create this folder manually outside static
+				
+				File saveDir = new File(uploadDir);
+				if (!saveDir.exists()) {
+					saveDir.mkdirs(); // create dirs if not exist
+				}
+//				delete the old image
+				String oldimageName=oldContactDetail.getImage();
+				Path oldPath = Paths.get(uploadDir,oldimageName);
+				try {
+			        Files.deleteIfExists(oldPath);
+			        System.out.println("Old image deleted: " + oldPath.toString());
+			    } catch (IOException e) {
+			        System.out.println("Failed to delete old image: " + oldPath.toString());
+			        e.printStackTrace();
+			    }
+				
+				
+				
+//				update the new image
+								
+
+
+				// Build file path
+				contact.setImage(file.getOriginalFilename());
+				Path path = Paths.get(uploadDir, file.getOriginalFilename());
+
+				// Copy file
+				Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+
+				System.out.println("Image uploaded to: " + path.toString());
+				session.setAttribute("message",new Messages("your contact is updated","success"));
+				
+			}else {
+				contact.setImage(oldContactDetail.getImage());				
+			}
+			
+			
+			User user = this.userRepository.getUserByname(principal.getName());
+			contact.setUser(user);
+			this.contactRepository.save(contact);
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage().toString());
+			// TODO: handle exception
+		}
+		
+		
+		System.out.println(contact.getName());
+		return "redirect:/user/"+contact.getCid()+"/contact";
+	}
 	
 	
 }

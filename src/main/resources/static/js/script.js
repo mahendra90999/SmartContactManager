@@ -23,3 +23,23 @@ $(document).mouseup(function (e) {
         $(".content").animate({ marginLeft: "3%" }, 300);
     }
 });
+
+
+
+
+// Auto hide alert after 3 seconds
+  setTimeout(() => {
+    const alertBox = document.getElementById("alertBox");
+    if (alertBox) {
+      alertBox.style.transition = "opacity 0.5s ease";
+      alertBox.style.opacity = "0";
+      setTimeout(() => alertBox.remove(), 500); // remove after fade out
+    }
+  }, 3000);
+  
+  
+  
+  
+  
+
+  
